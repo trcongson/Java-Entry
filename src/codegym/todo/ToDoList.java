@@ -1,5 +1,7 @@
 package codegym.todo;
 
+import java.util.Scanner;
+
 public class ToDoList {
     private Entry[] list;
     private int length;
@@ -25,4 +27,43 @@ public class ToDoList {
         }
     }
 
+    public void sortList(){
+        Entry backup;
+        System.out.println("Sắp xếp theo độ ưu tiên");
+        for (int i =0;i<length;i++){
+            for (int j =0; j < length;j++){
+                if (list[i].getPriority() > list[j].getPriority()){
+                    backup = list[i];
+                    list[i]=list[j];
+                    list[j] =backup;
+                    continue;
+                }
+            }
+        }
+    }
+
+    public void removeEntry(int id){
+        if (id<list.length){
+            System.out.println("Chắn chắn xóa nó? Y/N");
+            Scanner sc = new Scanner(System.in);
+            String check = sc.nextLine();
+            if (check.equals("y")){
+                int j =0;
+                for (int i =0;i<length;i++){
+                    if (i == id){
+                        i++;
+                    }
+                    list[j]= list[i];
+                    j++;
+                }
+
+                length--;
+            }else if(check.equals("n")) System.out.println("Bạn bỏ thao tác này");
+            else System.out.println("Bạn nhập sai");
+        }else {
+            System.out.println("Không tìm được entry để xóa");
+        }
+    }
+
+    public void getEntryByID(int id){}
 }
